@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Organizations - CRM Lite{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Organizations</h2>
+
+<!-- Add New Organization Form -->
+<h3 class="mb-3">Add New Organization</h3>
+<form action="/add_organization" method="POST" class="mb-5">
+    <div class="mb-3">
+        <label for="name" class="form-label">Organization Name:</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea id="description" name="description" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Add Organization</button>
+</form>
+
+<!-- Organizations Table -->
+<h3 class="mb-3">Organization List</h3>
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for organization in organizations %}
+        <tr>
+            <td>{{ organization[1] }}</td>
+            <td>{{ organization[2] }}</td>
+            <td>{{ organization[3] }}</td>
+            <td>
+                <a href="/edit_organization/{{ organization[0] }}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="/delete_organization/{{ organization[0] }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this organization?');">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

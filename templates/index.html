@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - CRM Lite{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card text-bg-primary h-100 shadow">
+            <div class="card-body">
+                <h5 class="card-title">Total Contacts</h5>
+                <p class="card-text fs-4">{{ total_contacts }}</p>
+                <a href="/contacts" class="btn btn-light btn-sm">View Contacts</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-success h-100 shadow">
+            <div class="card-body">
+                <h5 class="card-title">Total Organizations</h5>
+                <p class="card-text fs-4">{{ total_organizations }}</p>
+                <a href="/organizations" class="btn btn-light btn-sm">View Organizations</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-info h-100 shadow">
+            <div class="card-body">
+                <h5 class="card-title">Recent Interactions</h5>
+                <p class="card-text fs-4">{{ total_interactions }}</p>
+                <a href="/interactions" class="btn btn-light btn-sm">View Interactions</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5">
+    <h3>Recent Activities</h3>
+    <ul class="list-group">
+        {% for activity in recent_activities %}
+        <li class="list-group-item">{{ activity }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Log Interaction - CRM Lite{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Log a New Interaction</h2>
+
+<form action="/add_interaction" method="POST" class="card p-4 shadow-sm">
+    <div class="mb-3">
+        <label for="contact_id" class="form-label">Contact:</label>
+        <select id="contact_id" name="contact_id" class="form-select" required>
+            <option value="">Select a Contact</option>
+            {% for contact in contacts %}
+            <option value="{{ contact[0] }}">{{ contact[1] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="interaction_type" class="form-label">Interaction Type:</label>
+        <select id="interaction_type" name="interaction_type" class="form-select" required>
+            <option value="">Select Type</option>
+            <option value="Call">Call</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Email">Email</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="notes" class="form-label">Notes:</label>
+        <textarea id="notes" name="notes" class="form-control" rows="4" placeholder="Write any important details here..."></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="interaction_date" class="form-label">Date:</label>
+        <input type="date" id="interaction_date" name="interaction_date" class="form-control" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Log Interaction</button>
+</form>
+
+<script>
+    // Optional: Automatically select today's date
+    document.addEventListener('DOMContentLoaded', () => {
+        const dateField = document.getElementById('interaction_date');
+        if (dateField && !dateField.value) {
+            const today = new Date().toISOString().split('T')[0];
+            dateField.value = today;
+        }
+    });
+</script>
+{% endblock %}
